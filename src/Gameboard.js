@@ -1,4 +1,4 @@
-function Gameboard({ grid }) {
+function Gameboard({ grid, handleClick }) {
   return (
     <div style={{ display: 'inline-block' }}>
       <div
@@ -12,7 +12,9 @@ function Gameboard({ grid }) {
       >
         {grid.map((row, rowIndex) =>
           row.map((cell, columnIndex) => (
-            <Cell key={`${columnIndex}-${rowIndex}`} cell={cell} />
+            <Cell key={`${columnIndex}-${rowIndex}`}
+              cell={cell}
+              handleClick={() => handleClick(columnIndex, rowIndex)} />
           )))}
       </div>
     </div>
@@ -25,8 +27,12 @@ const cellStyle = {
   width: 75,
 };
 
-function Cell({ cell }) {
-  return <div style={cellStyle}> {cell} </div>;
+function Cell({ cell, handleClick }) {
+  return <div style={cellStyle}>
+    <button type="button" onClick={handleClick}>
+      {cell}
+    </button>
+  </div>;
 }
 
 export default Gameboard;
